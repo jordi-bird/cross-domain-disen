@@ -380,7 +380,6 @@ def create_model(inputsX, inputsY, a):
     with tf.name_scope("autoencoderX_train"):
         autoencoderX_tvars = [var for var in tf.trainable_variables() if
                               var.name.startswith("generatorX2Y_encoder")
-                              or var.name.startswith("F")
                               or var.name.startswith("generatorY2X_decoder")]
         autoencoderX_optim = tf.train.AdamOptimizer(a.lr, a.beta1)
         autoencoderX_grads_and_vars = autoencoderX_optim.compute_gradients(autoencoderX_loss, var_list=autoencoderX_tvars)
@@ -389,7 +388,6 @@ def create_model(inputsX, inputsY, a):
     with tf.name_scope("autoencoderY_train"):
         autoencoderY_tvars = [var for var in tf.trainable_variables() if
                               var.name.startswith("generatorY2X_encoder") or
-                              var.name.startswith("generatorX2Y_encoder") or
                               var.name.startswith("generatorX2Y_decoder")]
         autoencoderY_optim = tf.train.AdamOptimizer(a.lr, a.beta1)
         autoencoderY_grads_and_vars = autoencoderY_optim.compute_gradients(autoencoderY_loss, var_list=autoencoderY_tvars)
