@@ -26,6 +26,13 @@ for src_path in im.find(in_dir):
             src_paths2.append(src_path)
             dst_paths.append(dst_path)
 
+src_cutoff = len(src_paths1) / 2
+
+src_paths1 = src_paths1[:, :src_cutoff]
+src_paths2 = src_paths1[:, src_cutoff:]
+dst_paths = dst_paths[:, :src_cutoff]
+
+
 src_paths1.sort(key=lambda var:[int(x) if x.isdigit() else x for x in re.findall(r'[^0-9]|[0-9]+', var)])
 dst_paths.sort(key=lambda var:[int(x) if x.isdigit() else x for x in re.findall(r'[^0-9]|[0-9]+', var)])
 
